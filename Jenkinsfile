@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage("Git clone") {
             steps {
-                dir("/home/roman") {
+                dir("/home") {
                     sh "rm -rf master" // Видалити каталог master, якщо це безпечно
                     sh "git clone https://github.com/RomanNft/master"
                 }
@@ -21,7 +21,7 @@ pipeline {
 
         stage("Work") {
             steps {
-                dir("/home/roman/master") {
+                dir("/home/master") {
                     sh "docker-compose up -d"
                 }
             }
