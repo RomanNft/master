@@ -23,7 +23,7 @@ pipeline {
         stage("Work") {
             steps {
                 dir("/home/master") {
-                    sh "HOME=/home docker-compose up -d"
+                    sh "docker-compose up -d"
                 }
             }
         }
