@@ -22,8 +22,8 @@ pipeline {
 
         stage("Work") {
             steps {
-                dir("/home/master") {
-                    sh "docker-compose up -d --no-color --wait"
+                dir("/master") {
+                    sh "docker-compose up -d"
                 }
             }
         }
