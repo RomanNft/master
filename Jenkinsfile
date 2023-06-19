@@ -1,14 +1,32 @@
-pipeline {
-    agent any
-    
+#!groovy
+//  groovy Jenkinsfile
+properties([disableConcurrentBuilds()])\
+
+pipeline  {
+        agent { 
+           label ''
+        }
+
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+        timestamps()
+    }
     stages {
-        stage('Build') {
+        stage("Git clone") {
             steps {
                 sh '''
-                cp //home/roman/master/docker-compose.yml .
-                docker-compose up -d -p zabbix
+                cd /home/roman/
+                git clone         
                 '''
             }
-        }
+        }    
+        stage("Work") {
+            steps {
+                sh '''
+                cd /home/roman/master
+                docker-compose up -d
+                '''
+            }
+        }   
     }
 }
