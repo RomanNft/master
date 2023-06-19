@@ -1,25 +1,24 @@
+properties([disableConcurrentBuilds()])
+
 pipeline {
     agent {
-        // Specify the agent where the pipeline should run
-        label 'agent-label'
+        label ''
     }
-
     options {
-        disableConcurrentBuilds()
         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
         timestamps()
     }
-
+    
     stages {
         stage("Git clone") {
             steps {
                 sh '''
                 cd /home
                 git clone https://github.com/RomanNft/master
-                '''
+                '''           
             }
         }
-
+        
         stage("Set permissions") {
             steps {
                 sh "chmod 777 /home/master"
@@ -28,9 +27,10 @@ pipeline {
 
         stage("Work") {
             steps {
-                dir("/home/master") {
-                    sh "docker-compose up -d"
-                }
+                sh '''
+                cd /home/master
+                docker-compose up -d
+                '''
             }
         }
     }
