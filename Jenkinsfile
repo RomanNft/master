@@ -23,8 +23,7 @@ pipeline {
         stage("Work") {
             steps {
                 dir("/home/master") {
-                    sh "snap set system home=/home"
-                    sh "docker-compose up -d"
+                    sh "HOME=/home docker-compose up -d"
                 }
             }
         }
