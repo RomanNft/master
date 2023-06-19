@@ -19,9 +19,17 @@ pipeline {
         }
 
         stage("Work") {
+            environment {
+                DOCKER_COMPOSE_VERSION = '1.29.2'
+            }
             steps {
-                dir("roman/master") {
-                    sh "docker-compose up -d"
+                script {
+                    docker.withRegistry('') {
+                        docker.image('docker/compose').pull(DOCKER_COMPOSE_VERSION)
+                        docker.image('docker/compose').inside("-v /var/run/docker.sock:/var/run/docker.sock") {
+                            sh "cd roman/master && docker-compose up -d"
+                        }
+                    }
                 }
             }
         }
