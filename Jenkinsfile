@@ -5,8 +5,8 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''
-                cd /home/roman
-                docker-compose up -d -f docker-compose.yml -p zabbix
+                cp //home/roman/master/docker-compose.yml .
+                docker-compose up -d -p zabbix
                 '''
             }
         }
