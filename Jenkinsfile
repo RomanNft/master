@@ -13,7 +13,6 @@ pipeline {
         stage("Git clone") {
             steps {
                 dir("/home") {
-                    sh "rm -rf master" // Видалити каталог master, якщо це безпечно
                     sh "git clone https://github.com/RomanNft/master"
                 }
             }
