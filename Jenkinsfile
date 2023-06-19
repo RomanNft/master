@@ -1,10 +1,8 @@
-properties([disableConcurrentBuilds()])
-
 pipeline {
-    agent {
-        label ''
-    }
+    agent any
+    
     options {
+        disableConcurrentBuilds()
         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
         timestamps()
     }
@@ -12,10 +10,9 @@ pipeline {
     stages {
         stage("Git clone") {
             steps {
-                sh '''
-                cd /home
-                git clone https://github.com/RomanNft/master
-                '''           
+                dir('/home') {
+                    git 'https://github.com/RomanNft/master'
+                }
             }
         }
         
@@ -27,10 +24,8 @@ pipeline {
 
         stage("Work") {
             steps {
-                sh '''
-                cd /home/master
-                sh "docker-compose up -d"
-                '''
+                dir('/home/master') {
+                    sh "docker-compose up -d"
                 }
             }
         }
