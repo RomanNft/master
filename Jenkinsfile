@@ -1,4 +1,3 @@
-// Groovy Jenkinsfile
 properties([disableConcurrentBuilds()])
 
 pipeline {
@@ -13,7 +12,7 @@ pipeline {
     stages {
         stage("Git clone") {
             steps {
-                dir("/home/roman") {
+                dir("roman") {
                     sh "git clone https://github.com/RomanNft/master"
                 }
             }
@@ -21,11 +20,10 @@ pipeline {
 
         stage("Work") {
             steps {
-                dir("/home/roman/master") {
+                dir("roman/master") {
                     sh "docker-compose up -d"
                 }
             }
         }
     }
 }
-
