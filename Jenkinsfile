@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-        label ''
-    }
+    agent any
 
     options {
         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
@@ -11,16 +9,14 @@ pipeline {
     stages {
         stage("Git clone") {
             steps {
-                dir("/home/roman/") {
-                    git url: 'https://github.com/RomanNft/master.git'
-                }
+                git 'https://github.com/RomanNft/master.git'
             }
         }
 
         stage("Work") {
             steps {
-                dir("/home/roman/master") {
-                    sh "docker-compose up -d"
+                dir('master') {
+                    sh 'docker-compose up -d'
                 }
             }
         }
