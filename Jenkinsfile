@@ -1,28 +1,33 @@
-properties([disableConcurrentBuilds()])
+#!groovy
+//  groovy Jenkinsfile
+properties([disableConcurrentBuilds()])\
 
-pipeline {
-    agent {
-        label ''
-    }
+pipeline  {
+        agent { 
+           label ''
+        }
     options {
         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
         timestamps()
     }
-    
-    stages {
+
+   stages {
         stage("Git clone") {
             steps {
-                dir("/home") {
-                    sh "git clone https://github.com/RomanNft/master"
-                }
+                sh '''
+                cd /home
+                git clone https://github.com/RomanNft/master
+                
+                '''           
             }
         }
 
         stage("Work") {
-            steps {
-                dir("/home/master") {
-                    sh "docker-compose up -d"
-                }
+            steps{
+            sh '''
+                cd /home/master
+                docker-compose up -d
+                '''
             }
         }
     }
