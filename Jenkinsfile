@@ -28,7 +28,7 @@ pipeline {
         stage("Work") {
             steps {
                 sh '''
-                cd /home/master
+                cd /master
                 docker-compose up -d
                 '''
             }
