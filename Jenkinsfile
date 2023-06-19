@@ -15,7 +15,7 @@ pipeline {
 
         stage("Work") {
             steps {
-                sh 'cd /path/to/home/roman && docker-compose up -d'
+                sh 'cd /home/roman/master && docker-compose up -d'
             }
         }
     }
