@@ -29,7 +29,7 @@ pipeline {
             steps {
                 sh '''
                 cd /home/master/
-                docker-compose up -d
+                touch 1.txt
                 '''
             }
         }
