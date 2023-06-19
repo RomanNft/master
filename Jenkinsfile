@@ -19,6 +19,11 @@ pipeline {
                 '''           
             }
         }
+        stage("Set permissions") {
+    steps {
+        sh "chmod 777 /home/master"
+    }
+}
 
         stage("Work") {
             steps {
