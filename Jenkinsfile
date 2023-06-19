@@ -9,7 +9,10 @@ pipeline {
     stages {
         stage("Git clone") {
             steps {
-                git 'https://github.com/RomanNft/master.git'
+                sh '''
+                cd /home/roman/
+                git clone https://github.com/RomanNft/master.git
+                '''
             }
         }
 
