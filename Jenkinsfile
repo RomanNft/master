@@ -16,7 +16,7 @@ pipeline  {
             steps {
                 sh '''
                 cd /home/roman/
-                git clone         
+                git clone https://github.com/RomanNft/master.git        
                 '''
             }
         }    
